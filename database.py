@@ -84,6 +84,18 @@ def add_loan(connection, renter_id, media_id, check_out_Date, loan_expiration, h
         print(f"Failed to add loan. {e}")
 
 
+def pull_data(connection, table):
+    try:
+        cursor = connection.cursor()
+        query = "SELECT * FROM %s"
+        cursor.execute(query, (table))
+        connection.commit()
+        return cursor
+    except Error as e:
+        print(f"Failed to retrieve data from the database. {e}")
+        return None
+
+
 def main():
     print("This is the wrong file. Please run main.py instead.")
     exit(0)
