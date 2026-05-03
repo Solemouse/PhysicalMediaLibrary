@@ -82,3 +82,11 @@ def add_loan(connection, renter_id, media_id, check_out_Date, loan_expiration, h
         print(f"Successfully added loan for {renter_id} of media {media_id}.")
     except Error as e:
         print(f"Failed to add loan. {e}")
+
+
+def main():
+    print("This is the wrong file. Please run main.py instead.")
+    exit(0)
+
+
+main()
