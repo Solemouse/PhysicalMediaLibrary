@@ -1,5 +1,5 @@
 # PhysicalMediaLibrary
-idrc to write a description it is just a database
+A database to organize physical media, where it is stored, and who is loaning it out
 
 ```mermaid
 erDiagram
