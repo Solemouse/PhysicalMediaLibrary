@@ -31,8 +31,8 @@ CREATE TABLE Media_Names (
     quantity INT,
     type_id INT,
     CHECK (quantity >= 0),
-    FOREIGN KEY (location_id) REFERENCES Locations(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (type_id) REFERENCES Media_Types(id) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (location_id) REFERENCES Locations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (type_id) REFERENCES Media_Types(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Media (
@@ -52,7 +52,7 @@ CREATE TABLE Active_Loans (
     check_out_date DATE DEFAULT (CURRENT_DATE),
     loan_expiration DATE NOT NULL,
     CHECK (loan_expiration > check_out_date),
-    FOREIGN KEY (renter_id) REFERENCES Renters(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (media_id) REFERENCES Media_Names(id) ON DELETE SET NULL ON UPDATE CASCADE,
-    FOREIGN KEY (home_id) REFERENCES Locations(id) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (renter_id) REFERENCES Renters(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (media_id) REFERENCES Media_Names(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (home_id) REFERENCES Locations(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
