@@ -8,7 +8,7 @@ def connect_db():
             host="localhost",
             database="PhysicalMedia",
             user="root",
-            password="yeetus"
+            password="password"
         )
         if connection.is_connected():
             return connection
