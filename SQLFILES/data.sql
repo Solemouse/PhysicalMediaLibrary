@@ -69,3 +69,5 @@ INSERT INTO Active_Loans (renter_id, media_id, home_id, check_out_date, loan_exp
     (8, 8, 9, '2024-05-15', '2024-06-15'),
     (9, 9, 10, '2024-06-01', '2024-07-01'),
     (10, 10, 1, '2024-06-10', '2024-07-10');
+
+
