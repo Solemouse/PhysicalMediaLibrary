@@ -18,6 +18,8 @@ A database that manages a physical media rental system
 #### Video Demonstration
 https://github.com/Solemouse/PhysicalMediaLibrary/blob/main/2026-05-04%2023-35-48.mp4
 
+
+#### ERD Diagram
 ```mermaid
 erDiagram
     Locations }|--o{ Media_Names : hold
@@ -63,3 +65,7 @@ erDiagram
         int media_name_id FK
     }
 ```
+
+
+### Reflection
+As it turns out, getting things to work exactly as you want them to in Python with MySQL is rather difficult, and docker likes to be a pain.
