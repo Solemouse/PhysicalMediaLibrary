@@ -118,6 +118,16 @@ def get_media_id(connection, name, quantity, location_id):
         return None
 
 
+def increment_loan_count(connection, renter_id):
+    try:
+        cursor = connection.cursor()
+        query = "UPDATE Renters SET num_loans = num_loans + %s WHERE id = %s"
+        cursor.execute(query, ("1", renter_id))
+        connection.commit()
+    except Error as e:
+        print(f"Failed to increment loan counter. {e}")
+
+
 def main():
     print("This is the wrong file. Please run main.py instead.")
     exit(0)
