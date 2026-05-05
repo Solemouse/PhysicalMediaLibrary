@@ -29,12 +29,12 @@ def add_location(connection, name, address):
         print(f"Failed to add location. {e}")
 
 
-def add_renter(connection, name):
+def add_renter(connection, name, num_loans):
     # Add a renter to the database.
     try:
         cursor = connection.cursor()
-        query = "INSERT INTO Renters (name, num_loans) VALUES (%s, 0)"
-        cursor.execute(query, (name))
+        query = "INSERT INTO Renters (name, num_loans) VALUES (%s, %s)"
+        cursor.execute(query, (name, num_loans))
         connection.commit()
         print(f"Successfully added renter {name}.")
     except Error as e:
@@ -104,8 +104,18 @@ def update_data(connection, table, row, column, value):
         connection.commit()
     except Error as e:
         print(f"Failed to update data. {e}")
-        print(query)
-        print(cursor)
+
+
+def get_media_id(connection, name, quantity, location_id):
+    try:
+        cursor = connection.cursor(buffered=True)
+        query = "SELECT id FROM Media_Names WHERE name = %s AND location_id = %s AND quantity = %s"
+        cursor.execute(query, (name, location_id, quantity))
+        connection.commit()
+        return cursor
+    except Error as e:
+        print(f"Failed to retrieve Media ID. {e}")
+        return None
 
 
 def main():
