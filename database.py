@@ -96,6 +96,18 @@ def pull_data(connection, table):
         return None
 
 
+def update_data(connection, table, row, column, value):
+    try:
+        cursor = connection.cursor()
+        query = f"UPDATE {table} SET {column}=%s WHERE id=%s"
+        cursor.execute(query, (value, row))
+        connection.commit()
+    except Error as e:
+        print(f"Failed to update data. {e}")
+        print(query)
+        print(cursor)
+
+
 def main():
     print("This is the wrong file. Please run main.py instead.")
     exit(0)
