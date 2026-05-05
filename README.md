@@ -10,17 +10,14 @@ A database that manages a physical media rental system
 * Active_Loans: Tracks every rental and links a renter to what media they currently have checked out, with checkout and expiration dates
 
 #### USAGE
-
-#### MORE STUFF
-* First download the fishserver.py file and a client file of your chosing
-* Find the ip of the server
-* Launch the client of your chosing
-* If using fishclient it will automatically ask for a port
-* If using fishchatsharp you need to go to file and then connect to server
-* Then you enter the ip, port, and username
-* Then it will connect and you can start chatting
+* Make sure you have the database with all the entries inputted and created
+* Python3 the main.py file to begin utilizing the database
+* Select options based on the list
+##### When it asks you to select an entity from a list you have to use the ID number
 
 #### Video Demonstration
+https://github.com/Solemouse/PhysicalMediaLibrary/blob/main/2026-05-04%2023-35-48.mp4
+
 ```mermaid
 erDiagram
     Locations }|--o{ Media_Names : hold
