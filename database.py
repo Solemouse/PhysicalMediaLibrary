@@ -128,6 +128,50 @@ def increment_loan_count(connection, renter_id):
         print(f"Failed to increment loan counter. {e}")
 
 
+def decrement_loan_count(connection, renter_id):
+    try:
+        cursor = connection.cursor()
+        query = "UPDATE Renters SET num_loans = num_loans - %s WHERE id = %s"
+        cursor.execute(query, ("1", renter_id))
+        connection.commit()
+    except Error as e:
+        print(f"Failed to decrement loan counter. {e}")
+
+
+def delete_data(connection, table, row):
+    try:
+        cursor = connection.cursor()
+        query = f"DELETE FROM {table} WHERE id = %s OR id = %s"
+        cursor.execute(query, (row, row))
+        connection.commit()
+    except Error as e:
+        print(f"Failed to delete data. {e}")
+
+
+def get_media_type_id(connection, media_name_id):
+    try:
+        cursor = connection.cursor(buffered=True)
+        query = "SELECT type_id FROM Media_Names WHERE id = %s OR id = %s"
+        cursor.execute(query, (media_name_id, media_name_id))
+        connection.commit()
+        return cursor
+    except Error as e:
+        print(f"Failed to retrieve Media Type ID. {e}")
+        return None
+
+
+def get_media_junct_id(connection, media_name_id, media_type_id):
+    try:
+        cursor = connection.cursor(buffered=True)
+        query = "SELECT id FROM Media WHERE media_name_id = %s AND media_type_id = %s"
+        cursor.execute(query, (media_name_id, media_type_id))
+        connection.commit()
+        return cursor
+    except Error as e:
+        print(f"Failed to retrieve Media ID. {e}")
+        return None
+
+
 def main():
     print("This is the wrong file. Please run main.py instead.")
     exit(0)

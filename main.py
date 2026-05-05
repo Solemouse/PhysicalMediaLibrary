@@ -20,11 +20,8 @@ def menu(db_connection):
         print("1. View Data")
         print("2. Modify Existing Data")
         print("3. Add New Data")
-        # print("4. Add Media")
-        # print("5. Add Media Type")
-        # print("6. Add Renter")
-        # print("7. Add Loan")
-        print("4. Exit")
+        print("4. Delete Data")
+        print("5. Exit")
 
         choice = input("\n>")
 
@@ -224,6 +221,63 @@ def menu(db_connection):
                 else:
                     print("Please input a valid option.")
         elif choice == "4":
+            print("Deleting data.")
+            while True:
+                print("-" * 80)
+                print("Select an option.\n1. Delete a Location.\n2. Delete Media.\n3. Delete Media Types.\n4. Delete Renters.\n5. Delete Loans.\n6. Go Back")
+
+                delete_data_choice = input("\n> ")
+
+                if delete_data_choice == "1":
+                    location_data = database.pull_data(db_connection, "Locations")
+                    for (id, name, address) in location_data:
+                        print("Location #{}\n{}\nlocated at {}".format(id, name, address))
+                    entry_to_delete = input("Input the Location number you wish to delete.\n> ")
+                    confirmation = input(f"You are about to delete location {entry_to_delete}. Are you sure you wish to proceed?\n>")
+                    if confirmation.lower() == "yes":
+                        database.delete_data(db_connection, "Locations", entry_to_delete)
+                        print(f"Location {entry_to_delete} has been deleted.")
+                elif delete_data_choice == "2":
+                    media_data = database.pull_data(db_connection, "Media_Names")
+                    for (id, location_id, name, acquiry_date, quantity, type_id) in media_data:
+                        print("Media #{}\n{}\nLocated at Location #{}\nAcquired on {}\nAmount Available: {}\nType ID={}".format(id, name, location_id, acquiry_date, quantity, type_id))
+                    entry_to_delete = input("Input the Media number you wish to delete.\n> ")
+                    confirmation = input(f"You are about to delete media {entry_to_delete}. Are you sure you wish to proceed?\n> ")
+                    if confirmation.lower() == "yes":
+                        database.delete_data(db_connection, "Media_Names", entry_to_delete)
+                        print(f"Media {entry_to_delete} has been deleted.")
+                elif delete_data_choice == "3":
+                    media_type_data = database.pull_data(db_connection, "Media_Types")
+                    for (id, type, category) in media_type_data:
+                        print("Media Type #{}\n{}\nPrimarily contains: {}".format(id, type, category))
+                    entry_to_delete = input("Input the Media Type number you wish to delete.\n> ")
+                    confirmation = input(f"You are about to delete media type {entry_to_delete}. Are you sure you wish to proceed?\n> ")
+                    if confirmation.lower() == "yes":
+                        database.delete_data(db_connection, "Media_Types", entry_to_delete)
+                        print(f"Media Type {entry_to_delete} has been deleted.")
+                elif delete_data_choice == "4":
+                    renter_data = database.pull_data(db_connection, "Renters")
+                    for (id, name, num_loans) in renter_data:
+                        print("Renter ID#{}\n{}\nCurrently has {} loans.".format(id, name, num_loans))
+                    entry_to_delete = input("Input the ID# of the Renter you wish to delete.\n> ")
+                    confirmation = input(f"You are about to delete the Renter with ID# {entry_to_delete}. Are you sure you wish to proceed?\n> ")
+                    if confirmation.lower() == "yes":
+                        database.delete_data(db_connection, "Renters", entry_to_delete)
+                        print(f"Renter {entry_to_delete} has been deleted.")
+                elif delete_data_choice == "5":
+                    loan_data = database.pull_data(db_connection, "Active_Loans")
+                    for (id, renter_id, media_id, home_id, check_out_date, loan_expiration) in loan_data:
+                        print("Loan ID#{}\n Rented by Renter ID#{}, Media {} from location #{}\nChecked out on {}\n Due on {}".format(id, renter_id, media_id, home_id, check_out_date, loan_expiration))
+                    entry_to_delete = input("Input the ID# of the Loan you wish to delete.\n> ")
+                    confirmation = input(f"You are about to delete the Loan with ID# {entry_to_delete}. Are you sure you wish to proceed?\n> ")
+                    if confirmation.lower() == "yes":
+                        database.delete_data(db_connection, "Active_Loans", entry_to_delete)
+                        print(f"Loan {entry_to_delete} has been deleted.")
+                elif delete_data_choice == "6":
+                    break
+                else:
+                    print("Please input a valid option.")
+        elif choice == "5":
             db_connection.close()
             print("Disconnected from database.\nGoodbye!")
             break
