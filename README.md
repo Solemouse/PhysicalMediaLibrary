@@ -10,6 +10,10 @@ A database that manages a physical media rental system
 * Active_Loans: Tracks every rental and links a renter to what media they currently have checked out, with checkout and expiration dates
 
 #### USAGE
+* Install mysql, mysql.connector, python3
+* Create docker container and database within the container
+* Once in database copy paste contents of schema.sql into the terminal (FOUND IN SQLFILES)
+* Once schema.sql pasted then copy paste all data (TEST DATA IN data.sql FOUND IN SQLFILES)
 * Make sure you have the database with all the entries inputted and created
 * Python3 the main.py file to begin utilizing the database
 * Select options based on the list
