@@ -29,8 +29,8 @@ def menu(db_connection):
         choice = input("\n>")
 
         if choice == "1":
+            print("Viewing Data.")
             while True:
-                print("Viewing Data.")
                 print("-" * 80)
                 print("Select an option:")
                 print("1. View Locations")
@@ -57,11 +57,11 @@ def menu(db_connection):
                 elif view_data_choice == "4":
                     renter_data = database.pull_data(db_connection, "Renters")
                     for (id, name, num_loans) in renter_data:
-                        print("Renter ID#{}\n{}\nCurrently has {} loans.")
+                        print("Renter ID#{}\n{}\nCurrently has {} loans.".format(id, name, num_loans))
                 elif view_data_choice == "5":
                     loan_data = database.pull_data(db_connection, "Active_Loans")
                     for (id, renter_id, media_id, home_id, check_out_date, loan_expiration) in loan_data:
-                        print("Loan ID#{}\n Rented by Renter ID#{}, Media {} from location #{}\nChecked out on {}\n Due on {}")
+                        print("Loan ID#{}\n Rented by Renter ID#{}, Media {} from location #{}\nChecked out on {}\n Due on {}".format(id, renter_id, media_id, home_id, check_out_date, loan_expiration))
                 elif view_data_choice == "6":
                     break
 
