@@ -86,9 +86,9 @@ def add_loan(connection, renter_id, media_id, check_out_Date, loan_expiration, h
 
 def pull_data(connection, table):
     try:
-        cursor = connection.cursor()
-        query = "SELECT * FROM %s"
-        cursor.execute(query, (table))
+        cursor = connection.cursor(buffered=True)
+        query = f"SELECT * FROM {table} ORDER BY id"
+        cursor.execute(query)
         connection.commit()
         return cursor
     except Error as e:
