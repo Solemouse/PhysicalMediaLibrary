@@ -64,6 +64,110 @@ def menu(db_connection):
                         print("Loan ID#{}\n Rented by Renter ID#{}, Media {} from location #{}\nChecked out on {}\n Due on {}".format(id, renter_id, media_id, home_id, check_out_date, loan_expiration))
                 elif view_data_choice == "6":
                     break
+                else:
+                    print('Please input a valid option.')
+        elif choice == "2":
+            print("Modifying existing data.")
+            while True:
+                print("-" * 80)
+                print("Select an option:")
+                print("1. Modify Locations")
+                print("2. Modify Media")
+                print("3. Modify Media Types")
+                print("4. Modify Renters")
+                print("5. Modify Loans")
+                print("6. Go Back")
+
+                modify_data_choice = input("\n> ")
+
+                if modify_data_choice == "1":
+                    location_data = database.pull_data(db_connection, "Locations")
+                    for (id, name, address) in location_data:
+                        print("Location #{}\n{}\nlocated at {}".format(id, name, address))
+                    entry_to_modify = input("Select an entry to modify.\n> ")
+                    print("You may modify these fields.\n1. Name\n2. Address\n")
+                    field_to_modify = input("Select an option.\n> ")
+                    final_value = input("Please input the value you would like this field to have.\n> ")
+                    if field_to_modify == "1":
+                        field_to_modify_str = "name"
+                    elif field_to_modify == "2":
+                        field_to_modify_str = "address"
+                    else:
+                        print("Please input a valid option.")
+                elif modify_data_choice == "2":
+                    media_data = database.pull_data(db_connection, "Media_Names")
+                    for (id, location_id, name, acquiry_date, quantity, type_id) in media_data:
+                        print("Media #{}\n{}\nLocated at Location #{}\nAcquired on {}\nAmount Available: {}\nType ID={}".format(id, name, location_id, acquiry_date, quantity, type_id))
+                    entry_to_modify = input("Select an entry to modify.\n> ")
+                    print("You may modify these fields.\n1. Name\n2. Location\n3. Acquiry Date\n4. Quantity\n5. Type\n")
+                    field_to_modify = input("Select an option.\n> ")
+                    final_value = input("Please input the value you would like this field to have.\n> ")
+                    if field_to_modify == "1":
+                        field_to_modify_str = "name"
+                    elif field_to_modify == "2":
+                        field_to_modify_str = "location_id"
+                    elif field_to_modify == "3":
+                        field_to_modify_str == "acquiry_date"
+                    elif field_to_modify == "4":
+                        field_to_modify_str == "quantity"
+                    elif field_to_modify == "5":
+                        field_to_modify_str == "type_id"
+                    else:
+                        print("Please input a valid option.")
+                elif modify_data_choice == "3":
+                    media_type_data = database.pull_data(db_connection, "Media_Types")
+                    for (id, type, category) in media_type_data:
+                        print("Media Type #{}\n{}\nPrimarily contains: {}".format(id, type, category))
+                    entry_to_modify = input("Select an entry to modify.\n> ")
+                    print("You may modify these fields.\n1. Name\n2. Primary Contents\n")
+                    field_to_modify = input("Select an option.\n> ")
+                    final_value = input("Please input the value you would like this field to have.\n> ")
+                    if field_to_modify == "1":
+                        field_to_modify_str = "name"
+                    elif field_to_modify == "2":
+                        field_to_modify_str = "category"
+                    else:
+                        print("Please input a valid option.")
+                elif modify_data_choice == "4":
+                    renter_data = database.pull_data(db_connection, "Renters")
+                    for (id, name, num_loans) in renter_data:
+                        print("Renter ID#{}\n{}\nCurrently has {} loans.".format(id, name, num_loans))
+                    entry_to_modify = input("Select an entry to modify.\n> ")
+                    print("You may modify these fields.\n1. Name\n2. Number of active loans\n")
+                    field_to_modify = input("Select an option.\n> ")
+                    final_value = input("Please input the value you would like this field to have.\n> ")
+                    if field_to_modify == "1":
+                        field_to_modify_str = "name"
+                    elif field_to_modify == "2":
+                        field_to_modify_str = "num_loans"
+                    else:
+                        print("Please input a valid option.")
+                elif modify_data_choice == "5":
+                    loan_data = database.pull_data(db_connection, "Active_Loans")
+                    for (id, renter_id, media_id, home_id, check_out_date, loan_expiration) in loan_data:
+                        print("Loan ID#{}\n Rented by Renter ID#{}, Media {} from location #{}\nChecked out on {}\n Due on {}".format(id, renter_id, media_id, home_id, check_out_date, loan_expiration))
+                    entry_to_modify = input("Select an entry to modify.\n> ")
+                    print("You may modify these fields.\n1. Render ID#\n2. Media ID#\n3. Home Location\n4. Checkout Date\n5. Due Date\n")
+                    field_to_modify = input("Select an option.\n> ")
+                    final_value = input("Please input the value you would like this field to have.\n> ")
+                    if field_to_modify == "1":
+                        field_to_modify_str = "renter_id"
+                    elif field_to_modify == "2":
+                        field_to_modify_str = "media_id"
+                    elif field_to_modify == "3":
+                        field_to_modify_str == "home_id"
+                    elif field_to_modify == "4":
+                        field_to_modify_str == "check_out_date"
+                    elif field_to_modify == "5":
+                        field_to_modify_str == "loan_expiration"
+                    else:
+                        print("Please input a valid option.")
+
+                    database.update_data(db_connection, "Active_Loans", entry_to_modify, field_to_modify_str, final_value)
+                elif modify_data_choice == "6":
+                    break
+                else:
+                    print("Please input a valid option.")
 
 
 main()
